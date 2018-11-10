@@ -1,9 +1,21 @@
 import sysv_ipc
 import json
 from flask import Flask
-import random 
+import random
+import redis
 
 max_key = 10000
+redis_host = 'localhost'
+
+def write_into_kvs(shmid, size, topic):
+	r = redis.Redis(
+		host=redis_host,
+		port=6379,
+		password='')
+	r.rpush(topic, shmid, size)
+	for i in range(0,r.llen(topic)):
+	 	print "[dbg] the list created: ", r.lindex(topic, i)
+
 
 app = Flask(__name__)
 
@@ -18,7 +30,7 @@ def createTopic(topicName, shmSize):
   except:
      error_msg = "Could not create shm because ...\n"
      return str(0) + " " + error_msg
-  #write_into_kvs(shmid, size, topic)
+  write_into_kvs(shmid, size, topic)
   return "1" + " " + str(key)
 
 #registers subscriber at topic in kv store
