@@ -6,4 +6,4 @@ RUN apt-get install -y python-pip
 RUN pip install sysv_ipc
 RUN pip install flask
 COPY broker_api.py /
-CMD ["python /broker_api.py"]
+CMD ["python", "/broker_api.py"]
