@@ -31,8 +31,7 @@ shmem = subs[0]
 shmSize = subs[1]
 msgSize = subs[2]
 offset = 0;
-i = 0
-#while True:
+
 while True:
   mem_data = shmem.read(msgSize, offset)
   find_data=mem_data.find('\0')
