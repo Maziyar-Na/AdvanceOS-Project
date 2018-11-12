@@ -5,7 +5,7 @@ import random
 import redis
 
 max_key = 10000
-redis_host = 'localhost'
+redis_host = '10.0.2.15'
 
 r = redis.Redis(
                 host=redis_host,
@@ -22,7 +22,7 @@ app = Flask(__name__)
 #create shared memory
 #save shmid, topic name 
 #returns shmid
-@app.route("/createTopic/<string:topicName>/<int:shmSize>")
+@app.route("/createTopic/<string:topicName>/<int:shmSize>/<int:msgSize>")
 def createTopic(topicName, shmSize, msgSize):
   shmid = random.randint(0, max_key)
   topics = r.keys()
@@ -34,7 +34,7 @@ def createTopic(topicName, shmSize, msgSize):
   except:
      error_msg = "Could not create shm because ...\n"
      return str(0) + " " + error_msg
-  write_into_kvs(shmid, shmSize, topicName), msgSize)
+  write_into_kvs(shmid, shmSize, topicName, msgSize)
   return "1" + " " + str(shmid)
 
 #registers subscriber at topic in kv store
