@@ -33,7 +33,7 @@ msgSize = subs[2]
 offset = 0;
 i = 0
 #while True:
-while i < 10000000:
+while True:
   mem_data = shmem.read(msgSize, offset)
   find_data=mem_data.find('\0')
   data=mem_data[:find_data]
