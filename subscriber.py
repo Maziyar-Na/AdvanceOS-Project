@@ -1,7 +1,10 @@
 import redis
+import sysv_ipc
 
-def read_from_topic(shmid, shmsize):
-	# I don't know how to read from shared memry
+def read_from_topic(key, shmsize):
+	shm =  sysv_ipc.SharedMemory(key)
+	shm.attach()
+	shmem.read(shmsize, 0)
 
 def get_the_info_for_a_topic(topic):
 	r = redis.Redis(
@@ -11,8 +14,8 @@ def get_the_info_for_a_topic(topic):
 	return r.lindex(topic , 0) , r.lindex(topic , 1)
 
 def read_topic("ellection"):
-	shmid , shmsize = get_the_info_for_a_topic("ellection")
-	if (shmid and shmsize):
-		read_from_topic(shmid , shmsize)
+	key , shmsize = get_the_info_for_a_topic("ellection")
+	if (key and shmsize):
+		read_from_topic(key , shmsize)
 
 read_topic("ellection")
