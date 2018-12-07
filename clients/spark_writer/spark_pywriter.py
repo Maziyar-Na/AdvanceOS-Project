@@ -88,36 +88,18 @@ def subsTopic(brokerAddr, topicName, clientID):
 
 
 def main():
-  createTopic('10.0.2.15', 'xor', 1024, 16)
-  pub = initTopic('10.0.2.15', 'xor')
+  createTopic('10.0.2.15', 'numbers', 1024, 16)
+  pub = initTopic('10.0.2.15', 'numbers')
   shmem = pub[0]
   shmSize = pub[1]
   msgSize = pub[2]
   offset = 0
-  #data = "Hello World"
-#  i = 0
   while True:
-#  while i < 1000:
-#    data = str(i)
-#    data=str(random.randint(0,1)) + "," + str(random.randint(0,1))
     data=str(random.randint(0,10000))
     print data
     shmem.write(data, offset)
     offset = (offset + msgSize) % shmSize    
-#    i += 1
-#	   data = data + str(i)
+
   return 0
 main()
-#memory = sysv_ipc.SharedMemory(123456)
 
-
-#while True:
-#  memory_value = memory.read()
-#  i=memory_value.find('\0')
-#  data=memory_value[:i]
-#  print data
-
-#memory.detach()
-
-#memory.remove()
-#print len(memory_value) 
