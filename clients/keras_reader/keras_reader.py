@@ -60,7 +60,7 @@ def main():
   model = load_model('xor.h5')    
 
   #init shm
-  subs = subsTopic("192.168.0.11", "xor", "c1")
+  subs = subsTopic("10.0.2.15", "xor", "c1")
   shmem = subs[0]
   shmSize = subs[1]
   msgSize = subs[2]
