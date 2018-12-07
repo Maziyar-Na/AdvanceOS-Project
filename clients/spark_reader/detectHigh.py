@@ -55,7 +55,7 @@ def main():
   sc = SparkContext("local", "detectHigh","localhost") 
 
   #init shm
-  subs = subsTopic("192.168.0.11", "numbers", "c1")
+  subs = subsTopic("10.0.2.15", "numbers", "c1")
   shmem = subs[0]
   shmSize = subs[1]
   msgSize = subs[2]
