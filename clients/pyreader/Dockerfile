@@ -1,3 +1,4 @@
+FROM ubuntu:16.04
 RUN apt-get update --fix-missing
 RUN apt-get install -y python
 RUN apt-get install -y python-dev
